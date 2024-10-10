@@ -8,32 +8,33 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace GestionDeProductosYServicios.Controllers.v1.Carriers;
 
 [ApiController]
-[Route("api/v1/Carriers/[controller]")]
+[Route("api/v1/[controller]")]
 [ApiExplorerSettings(GroupName = "v1")]
 [Tags("Carriers")]
 public class CarrierCreateController : CarrierController
 {
     private readonly CarrierServices CarrierServices;
 
-    public CarrierCreateController(CarrierServices CarrierServices): base(CarrierServices)
+    public CarrierCreateController(CarrierServices CarrierServices) : base(CarrierServices)
     {
         this.CarrierServices = CarrierServices;
     }
 
     /// <summary>
-    /// Crea un nuevo transportador.
+    /// Creates a new carrier.
     /// </summary>
-    /// <param name="CarrierDTO">El DTO del transportador que contiene los datos necesarios.</param>
-    /// <returns>Devuelve el nuevo transportador creado.</returns>
-    /// <response code="200">Devuelve el nuevo transportador creado.</response>
-    /// <response code="400">Si el modelo es nulo o inválido.</response>
+    /// <param name="CarrierDTO">The carrier DTO that contains the necessary data.</param>
+    /// <returns>Returns the newly created carrier.</returns>
+    /// <response code="200">Returns the newly created carrier.</response>
+    /// <response code="400">If the model is null or invalid.</response>
     [HttpPost]
-    [SwaggerOperation(Summary = "Crea un nuevo transportador", Description = "Permite al usuario crear un nuevo transportador.")]
-    [SwaggerResponse(200, "Transportador creado exitosame", typeof(Carrier))]
-    [SwaggerResponse(400, "El modelo no puede ser nulo o es inválido.")]
+    [SwaggerOperation(Summary = "Create a new carrier", Description = "Allows the user to create a new carrier.")]
+    [SwaggerResponse(200, "Carrier created successfully.", typeof(Carrier))]
+    [SwaggerResponse(400, "The model cannot be null or is invalid.")]
+
     public async Task<ActionResult<Carrier>> CreateCarrier([FromBody] CarrierDTO CarrierDTO)
     {
-        if(ModelState.IsValid == false)
+        if (ModelState.IsValid == false)
         {
             return BadRequest();
         }
@@ -45,7 +46,8 @@ public class CarrierCreateController : CarrierController
         {
             try
             {
-                var newCarrier = new Carrier{
+                var newCarrier = new Carrier
+                {
                     Carrier_name = CarrierDTO.Carrier_name,
                     Carrier_description = CarrierDTO.Carrier_description
                 };
@@ -54,7 +56,7 @@ public class CarrierCreateController : CarrierController
             }
             catch (DbUpdateException dbEX)
             {
-                
+
                 throw new DbUpdateException("Un error ocurrio durante el proceso", dbEX);
             }
         }
