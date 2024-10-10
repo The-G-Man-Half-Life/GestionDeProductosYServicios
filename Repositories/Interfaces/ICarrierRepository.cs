@@ -7,8 +7,8 @@ public interface ICarrierRepository
 {
     Task<IEnumerable<Carrier>> GetAll();
     Task<Carrier> GetById(int id);
-    Task<IActionResult> Create(CarrierDTO CarrierDTO);
-    Task<IActionResult> Delete(int id);
-    Task<IActionResult> Update(CarrierDTO CarrierDTO);
+    Task Create(Carrier Carrier);
+    Task Delete(int id);
+    Task Update(Carrier Carrier);
     Task<bool> CheckExistence(int id);
 }
