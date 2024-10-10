@@ -45,7 +45,7 @@ app.UseWelcomePage(new WelcomePageOptions{
 });
 
 
-//desarrollar el entorno de la pagina
+//desarrollar el entorno de la pagina 
 app.UseRouting();
 app.UseHttpsRedirection();
 
