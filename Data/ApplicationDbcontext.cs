@@ -6,6 +6,7 @@ namespace GestionDeProductosYServicios.Data;
 public class ApplicationDbcontext:DbContext
 {
     public DbSet<Carrier> Carriers {get; set;}
+    public DbSet<Category> Categories {get; set;}
 
     public ApplicationDbcontext(DbContextOptions<ApplicationDbcontext> options):base(options) {}
 
