@@ -12,6 +12,6 @@ public class ApplicationDbcontext:DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        CarrierSeeder.Seed(modelBuilder);
+        // CarrierSeeder.Seed(modelBuilder);
     }
 } 
