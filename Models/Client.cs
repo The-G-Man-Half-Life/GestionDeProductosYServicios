@@ -23,4 +23,5 @@ public class Client
         this.Client_address = Client_address;
         this.Client_contact = Client_contact;
     }
+    public Client() {}
 }
