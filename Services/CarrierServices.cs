@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace GestionDeProductosYServicios.Services;
 public class CarrierServices: ICarrierRepository
 {
-    private readonly ApplicationDbcontext Context;
+    public readonly ApplicationDbcontext Context;
 
     public CarrierServices(ApplicationDbcontext Context)
     {
