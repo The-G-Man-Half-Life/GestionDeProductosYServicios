@@ -1,7 +1,10 @@
 using DotNetEnv;
 using GestionDeProductosYServicios.Data;
+using GestionDeProductosYServicios.Repositories.Interfaces;
+using GestionDeProductosYServicios.Services;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 
 //cargar las variables de entorno
@@ -23,10 +26,45 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbcontext>(options =>
     options.UseMySql(connectionString, ServerVersion.Parse("8.0.20-mysql")));
 
+//espacio para las encriptaciones jwt
+
+//registrar repositorios y servicios
+builder.Services.AddScoped<ICarrierRepository, CarrierServices>();
+builder.Services.AddScoped<CarrierServices>();
 
 //configurando el entorno de la pagina
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Gestion De Productos y servicios", Version = "v1" });
+    c.SwaggerDoc("v2", new OpenApiInfo { Title = "Gestion De Productos y servicios", Version = "v2" });
+    c.EnableAnnotations();
+
+    // c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    // {
+    //     Description = "JWT Authorization header usando el esquema Bearer. Ejemplo: \"Bearer {token}\"",
+    //     Name = "Authorization",
+    //     In = ParameterLocation.Header,
+    //     Type = SecuritySchemeType.Http,
+    //     Scheme = "Bearer"
+    // });
+
+    // c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    // {
+    //     {
+    //         new OpenApiSecurityScheme
+    //         {
+    //             Reference = new OpenApiReference
+    //             {
+    //                 Type = ReferenceType.SecurityScheme,
+    //                 Id = "Bearer"
+    //             }
+    //         },
+    //         new string[] {}
+    //     }
+    // });
+});
 
 var app = builder.Build();
 

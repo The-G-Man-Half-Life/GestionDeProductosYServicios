@@ -3,6 +3,7 @@ using GestionDeProductosYServicios.Models;
 using GestionDeProductosYServicios.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace GestionDeProductosYServicios.Controllers.v1.Carriers;
 
@@ -19,7 +20,17 @@ public class CarrierCreateController : CarrierController
         this.CarrierServices = CarrierServices;
     }
 
+    /// <summary>
+    /// Crea un nuevo transportador.
+    /// </summary>
+    /// <param name="CarrierDTO">El DTO del transportador que contiene los datos necesarios.</param>
+    /// <returns>Devuelve el nuevo transportador creado.</returns>
+    /// <response code="200">Devuelve el nuevo transportador creado.</response>
+    /// <response code="400">Si el modelo es nulo o inválido.</response>
     [HttpPost]
+    [SwaggerOperation(Summary = "Crea un nuevo transportador", Description = "Permite al usuario crear un nuevo transportador.")]
+    [SwaggerResponse(200, "Transportador creado exitosame", typeof(Carrier))]
+    [SwaggerResponse(400, "El modelo no puede ser nulo o es inválido.")]
     public async Task<ActionResult<Carrier>> CreateCarrier([FromBody] CarrierDTO CarrierDTO)
     {
         if(ModelState.IsValid == false)
