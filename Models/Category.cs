@@ -22,4 +22,5 @@ public class Category
         this.Category_name = Category_name;
         this.Category_description = Category_description;
     }
+    public Category() {}
 }
