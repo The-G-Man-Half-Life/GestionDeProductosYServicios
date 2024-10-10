@@ -8,6 +8,7 @@ public class ApplicationDbcontext:DbContext
     public DbSet<Carrier> Carriers {get; set;}
     public DbSet<Category> Categories {get; set;}
     public DbSet<Client> Clients {get; set;}
+    public DbSet<Shipment> Shipments {get; set;}
 
     public ApplicationDbcontext(DbContextOptions<ApplicationDbcontext> options):base(options) {}
 

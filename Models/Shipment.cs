@@ -4,23 +4,38 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace GestionDeProductosYServicios.Models;
 
 [Table("Shipments")]
-public class Shipments
+public class Shipment
 {
     [Key]
     [Column("shipments_id")]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Shipments_id {get; set;}
+    public int Shipment_id {get; set;}
 
-    [Column("shipments_name")]
-    public string Shipments_name {get; set;}
+    [Column("shipments_weight_kg")]
+    public double Shipment_weight_kg {get; set;}
 
-    [Column("shipments_description")]
-    public string Shipments_description {get; set;}
+    [Column("shipments_price_usa")]
+    public string Shipment_price_usa {get; set;}
 
-    public Shipments(string Shipments_name,string Shipments_description)
+    [Column("shipment_order_date")]
+    public DateOnly? Shipment_order_date {get; set;}
+
+    [Column("shipment_arrival_date")]
+    public DateOnly? Shipment_arrival_date {get; set;}
+
+    [Column("carrier_id")]
+    public int Carrier_id {get; set;}
+
+    [ForeignKey(nameof(Carrier_id))]
+    public Carrier? Carrier {get; set;}
+
+    public Shipment(double Shipment_weight_kg ,string Shipment_price_usa ,DateOnly Shipment_order_date ,DateOnly Shipment_arrival_date ,int Carrier_id)
     {
-        this.Shipments_name = Shipments_name;
-        this.Shipments_description = Shipments_description;
+        this.Shipment_weight_kg = Shipment_weight_kg;
+        this.Shipment_price_usa = Shipment_price_usa;
+        this.Shipment_order_date = Shipment_order_date;
+        this.Shipment_arrival_date = Shipment_arrival_date;
+        this.Carrier_id = Carrier_id;
     }
-    public Shipments() {}
+    public Shipment() {}
 }
