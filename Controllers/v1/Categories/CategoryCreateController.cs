@@ -11,11 +11,11 @@ namespace GestionDeProductosYServicios.Controllers.v1.Categories;
 [Route("api/v1/[controller]")]
 [ApiExplorerSettings(GroupName = "v1")]
 [Tags("Categories")]
-public class CategoryCreateController : ControllerBase
+public class CategoryCreateController : CategoryController
 {
     private readonly CategoryServices CategoryServices;
 
-    public CategoryCreateController(CategoryServices CategoryServices)
+    public CategoryCreateController(CategoryServices CategoryServices): base(CategoryServices)
     {
         this.CategoryServices = CategoryServices;
     }

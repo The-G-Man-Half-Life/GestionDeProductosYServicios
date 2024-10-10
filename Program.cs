@@ -31,8 +31,8 @@ builder.Services.AddDbContext<ApplicationDbcontext>(options =>
 //registrar repositorios y servicios
 builder.Services.AddScoped<ICarrierRepository, CarrierServices>();
 builder.Services.AddScoped<CarrierServices>();
-builder.Services.AddScoped<ICarrierRepository, CarrierServices>();
-builder.Services.AddScoped<CarrierServices>();
+builder.Services.AddScoped<ICategoryRepository, CategoryServices>();
+builder.Services.AddScoped<CategoryServices>();
 
 //configurando el entorno de la pagina
 builder.Services.AddControllers();
