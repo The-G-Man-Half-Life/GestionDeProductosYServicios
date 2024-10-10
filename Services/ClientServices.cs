@@ -44,6 +44,7 @@ public class ClientServices: IClientRepository
         try
         {
             await Context.Clients.AddAsync(Client);
+            await Context.SaveChangesAsync();
         }
         catch (DbUpdateException dbEX)
         {
@@ -58,6 +59,7 @@ public class ClientServices: IClientRepository
         {
             var clientToDelete = await GetById(id);
             Context.Clients.Remove(clientToDelete);
+            await Context.SaveChangesAsync();
         }
         catch (DbUpdateException dbEX)
         {
@@ -71,6 +73,7 @@ public class ClientServices: IClientRepository
         try
         {
             Context.Clients.Update(Client);
+            await Context.SaveChangesAsync();
         }
         catch (DbUpdateException dbEX)
         {

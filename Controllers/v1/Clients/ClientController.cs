@@ -6,13 +6,13 @@ namespace GestionDeProductosYServicios.Controllers;
 [ApiController]
 [Route("api/v1/[controller]")]
 [ApiExplorerSettings(GroupName = "v1")]
-[Tags("Carriers")]
-public class CarrierController : ControllerBase
+[Tags("Clients")]
+public class ClientController : ControllerBase
 {
-    private readonly ICarrierRepository CarrierRepository;
+    private readonly IClientRepository ClientRepository;
 
-    public CarrierController(ICarrierRepository CarrierRepository)
+    public ClientController(IClientRepository ClientRepository)
     {
-        this.CarrierRepository = CarrierRepository;
+        this.ClientRepository = ClientRepository;
     }
 }
