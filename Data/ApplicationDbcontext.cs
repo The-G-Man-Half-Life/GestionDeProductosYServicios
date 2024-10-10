@@ -1,4 +1,5 @@
 using GestionDeProductosYServicios.Models;
+using GestionDeProductosYServicios.Seeders;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestionDeProductosYServicios.Data;
@@ -11,5 +12,6 @@ public class ApplicationDbcontext:DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        CarrierSeeder.Seed(modelBuilder);
     }
 } 
