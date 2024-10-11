@@ -12,13 +12,13 @@ public class Client
     public int Client_id {get; set;}
 
     [Column("client_name")]
-    public string Client_name  {get; set;}
+    public string? Client_name  {get; set;}
 
     [Column("client_address")]
-    public string Client_address  {get; set;}
+    public string? Client_address  {get; set;}
 
     [Column("client_contact")]
-    public string Client_contact  {get; set;}
+    public string? Client_contact  {get; set;}
 
     public Client(string Client_name ,string Client_address ,string Client_contact)
     {

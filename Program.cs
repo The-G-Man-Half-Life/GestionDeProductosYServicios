@@ -36,6 +36,8 @@ builder.Services.AddScoped<IClientRepository, ClientServices>();
 builder.Services.AddScoped<ClientServices>();
 builder.Services.AddScoped<IShipmentRepository, ShipmentServices>();
 builder.Services.AddScoped<ShipmentServices>();
+builder.Services.AddScoped<IProductRepository, ProductServices>();
+builder.Services.AddScoped<ProductServices>();
 
 //configurando el entorno de la pagina
 builder.Services.AddControllers();

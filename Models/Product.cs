@@ -4,29 +4,35 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace GestionDeProductosYServicios.Models;
 
 [Table("Products")]
-public class Products
+public class Product
 {
     [Key]
     [Column("product_id")]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Product_id {get; set;}
 
-    [Column("product_amount")]
-    public int Product_amount {get; set;}
+    [Column("product_name")]
+    public string? Product_name {get; set;}
 
-    [Column("product_id")]
-    public int Product_id {get; set;}
+    [Column("product_price")]
+    public double Product_price {get; set;}
 
-    [ForeignKey(nameof(Product_id))]
-    public Product? Carrier {get; set;}
+    [Column("product_description")]
+    public string? Product_description {get; set;}
 
-    public Shipment(double Shipment_weight_kg ,double Shipment_price_usa ,DateOnly? Shipment_order_date ,DateOnly? Shipment_arrival_date ,int Carrier_id)
+    [Column("category_id")]
+    public int Category_id {get; set;}
+
+    [ForeignKey(nameof(Category_id))]
+    public Category? Category {get; set;}
+
+
+    public Product(string? Product_name ,double Product_price ,string? Product_description ,int Category_id)
     {
-        this.Shipment_weight_k = Shipment_weight_kg;
-        this.Shipment_price_usa = Shipment_price_usa;
-        this.Shipment_order_date = Shipment_order_date;
-        this.Shipment_arrival_date = Shipment_arrival_date;
-        this.Carrier_id = Carrier_id;
+        this.Product_name = Product_name; 
+        this.Product_price = Product_price; 
+        this.Product_description = Product_description; 
+        this.Category_id = Category_id; 
     }
-    public Shipment() {}
+    public Product() {}
 }

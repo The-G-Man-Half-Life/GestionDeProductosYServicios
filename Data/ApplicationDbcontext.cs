@@ -9,6 +9,7 @@ public class ApplicationDbcontext:DbContext
     public DbSet<Category> Categories {get; set;}
     public DbSet<Client> Clients {get; set;}
     public DbSet<Shipment> Shipments {get; set;}
+    public DbSet<Product> Products {get; set;}
 
     public ApplicationDbcontext(DbContextOptions<ApplicationDbcontext> options):base(options) {}
 
