@@ -1,5 +1,6 @@
 using DotNetEnv;
 using GestionDeProductosYServicios.Data;
+using GestionDeProductosYServicios.Models;
 using GestionDeProductosYServicios.Repositories.Interfaces;
 using GestionDeProductosYServicios.Services;
 using GestionDeShipment_ProductosYServicios.Repositories.Interfaces;
@@ -41,6 +42,8 @@ builder.Services.AddScoped<IProductRepository, ProductServices>();
 builder.Services.AddScoped<ProductServices>();
 builder.Services.AddScoped<IShipment_ProductRepository, Shipment_ProductServices>();
 builder.Services.AddScoped<Shipment_ProductServices>();
+builder.Services.AddScoped<IOrderRepository, OrderServices>();
+builder.Services.AddScoped<OrderServices>();
 
 //configurando el entorno de la pagina
 builder.Services.AddControllers();

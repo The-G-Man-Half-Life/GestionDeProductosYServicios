@@ -11,6 +11,7 @@ public class ApplicationDbcontext:DbContext
     public DbSet<Shipment> Shipments {get; set;}
     public DbSet<Product> Products {get; set;}
     public DbSet<Shipment_Product> Shipment_Products {get; set;}
+    public DbSet<Order> Orders {get; set;}
 
     public ApplicationDbcontext(DbContextOptions<ApplicationDbcontext> options):base(options) {}
 
