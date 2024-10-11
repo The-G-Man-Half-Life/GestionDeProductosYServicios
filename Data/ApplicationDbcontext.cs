@@ -19,13 +19,13 @@ public class ApplicationDbcontext:DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        CarrierSeeder.Seed(modelBuilder);
-        CategorySeeder.Seed(modelBuilder);
-        ClientSeeder.Seed(modelBuilder);
-        ShipmentSeeder.Seed(modelBuilder);
-        ProductSeeder.Seed(modelBuilder);
-        ShipmentProductSeeder.Seed(modelBuilder);
-        OrderSeeder.Seed(modelBuilder);
-        ProductOrderSeeder.Seed(modelBuilder);
+        // CarrierSeeder.Seed(modelBuilder);
+        // CategorySeeder.Seed(modelBuilder);
+        // ClientSeeder.Seed(modelBuilder);
+        // ShipmentSeeder.Seed(modelBuilder);
+        // ProductSeeder.Seed(modelBuilder);
+        // ShipmentProductSeeder.Seed(modelBuilder);
+        // OrderSeeder.Seed(modelBuilder);
+        // ProductOrderSeeder.Seed(modelBuilder);
     }
 } 
