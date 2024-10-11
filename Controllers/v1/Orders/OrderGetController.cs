@@ -72,4 +72,37 @@ public class OrderGetController : OrderController
             return await OrderServices.GetById(id);
         }
     }
+
+
+    /// <summary>
+    /// Retrieves all Orders From a specific date.
+    /// </summary>
+    /// <returns>A list of Orders.</returns>
+    /// <response code="200">Returns the list of Orders.</response>
+    /// <response code="204">No content if no Orders are found.</response>
+    [HttpGet("/getdate/{date}")]
+    [SwaggerOperation(Summary = "Get all Orders of a date", Description = "Retrieves a list of all Orders.")]
+    [SwaggerResponse(200, "Returns the list of Orders.", typeof(IEnumerable<Order>))]
+    [SwaggerResponse(204, "No content if no Orders are found.")]
+    public async Task<ActionResult<IEnumerable<Object>>> GetAllOrders([FromRoute]DateOnly? date)
+    {
+        var Orders = await OrderServices.GetAll();
+        var OrdersByADate = Orders.Where(o=>o.Order_creation_date == date).ToList();
+
+        if (OrdersByADate.Count() == 0)
+        {
+            return NoContent();
+        }
+        else
+        {
+            try
+            {
+                return Ok(OrdersByADate);
+            }
+            catch (DbUpdateException dbEX)
+            {
+                throw new DbUpdateException("An error occurred while retrieving Orders.", dbEX);
+            }
+        }
+    }
 }
