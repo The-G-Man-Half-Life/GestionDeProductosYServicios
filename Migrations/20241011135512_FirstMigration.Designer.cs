@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestionDeProductosYServicios.Migrations
 {
     [DbContext(typeof(ApplicationDbcontext))]
-    [Migration("20241011132923_CreationOfOrderEntity")]
-    partial class CreationOfOrderEntity
+    [Migration("20241011135512_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
