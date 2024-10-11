@@ -12,6 +12,7 @@ public class ApplicationDbcontext:DbContext
     public DbSet<Product> Products {get; set;}
     public DbSet<Shipment_Product> Shipment_Products {get; set;}
     public DbSet<Order> Orders {get; set;}
+    public DbSet<Product_order> Products_Orders{get; set;}
 
     public ApplicationDbcontext(DbContextOptions<ApplicationDbcontext> options):base(options) {}
 
