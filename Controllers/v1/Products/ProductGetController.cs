@@ -171,4 +171,37 @@ public class ProductGetController : ProductController
             }
         }
     }
+    
+    
+    /// <summary>
+    /// Retrieves all Products of a category.
+    /// </summary>
+    /// <returns>A list of Products.</returns>
+    /// <response code="200">Returns the list of Products.</response>
+    /// <response code="204">No content if no Products are found.</response>
+    [HttpGet("/products_by_a_category/{category_id}")]
+    [SwaggerOperation(Summary = "Get all Products of a category", Description = "Retrieves a list of all Products by a category.")]
+    [SwaggerResponse(200, "Returns the list of Products.", typeof(IEnumerable<Product>))]
+    [SwaggerResponse(204, "No content if no Products are found.")]
+    public async Task<ActionResult<IEnumerable<Product>>> GetAllProductsByACategory([FromRoute]int category_id)
+    {
+        var Products = await ProductServices.GetAll();
+        var productsByACategory = Products.Where(p=>p.Category_id == category_id);
+
+        if (Products.Count() == 0)
+        {
+            return NoContent();
+        }
+        else
+        {
+            try
+            {
+                return Ok(productsByACategory);
+            }
+            catch (DbUpdateException dbEX)
+            {
+                throw new DbUpdateException("An error occurred while retrieving Products.", dbEX);
+            }
+        }
+    }
 }
