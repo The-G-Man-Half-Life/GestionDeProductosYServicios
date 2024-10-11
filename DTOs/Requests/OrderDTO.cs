@@ -4,14 +4,14 @@ namespace GestionDeProductosYServicios.DTOs.Requests;
 public class OrderDTO
 {
     [Required]
-    public DateOnly? OrderCreationDate { get; set; }
+    public DateOnly? Order_creation_date { get; set; }
 
     [Required]
-    public DateOnly? OrderDeliveryDate { get; set; }
+    public DateOnly? Order_delivery_date { get; set; }
 
     [Required]
-    public int ClientId { get; set; }
+    public int Client_id { get; set; }
 
     [Required]
-    public int CarrierId { get; set; }
+    public int Carrier_id { get; set; }
 }
