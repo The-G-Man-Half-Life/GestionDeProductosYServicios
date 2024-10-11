@@ -13,10 +13,14 @@ namespace GestionDeProductosYServicios.Controllers.v1.Products;
 public class ProductGetController : ProductController
 {
     private readonly ProductServices ProductServices;
+    private readonly Shipment_ProductServices Shipment_ProductServices;
+    private readonly Products_Orderservices Products_Orderservices;
 
-    public ProductGetController(ProductServices ProductServices): base(ProductServices)
+    public ProductGetController(ProductServices ProductServices,Shipment_ProductServices Shipment_ProductServices,Products_Orderservices Products_Orderservices): base(ProductServices)
     {
         this.ProductServices = ProductServices;
+        this.Shipment_ProductServices =Shipment_ProductServices;
+        this.Products_Orderservices = Products_Orderservices;
     }
 
     /// <summary>
@@ -70,6 +74,101 @@ public class ProductGetController : ProductController
         else
         {
             return await ProductServices.GetById(id);
+        }
+    }
+
+    /// <summary>
+    /// Retrieves all Products by a keyword.
+    /// </summary>
+    /// <returns>A list of Products by a keyword.</returns>
+    /// <response code="200">Returns the list of Products.</response>
+    /// <response code="204">No content if no Products are found.</response>
+    [HttpGet("/searchbykeyword/{keyword}")]
+    [SwaggerOperation(Summary = "Get all Products by keyword", Description = "Retrieves a list of products by a keyword.")]
+    [SwaggerResponse(200, "Returns the list of Products.", typeof(IEnumerable<Product>))]
+    [SwaggerResponse(204, "No content if no Products are found.")]
+    public async Task<ActionResult<IEnumerable<Product>>> GetAllProductsByKeywork([FromRoute]string keyword)
+    {
+        var Products = await ProductServices.GetAll();
+        var FoundElements = Products.Where(p=>p.Product_name.Contains(keyword)|| p.Product_description.Contains(keyword)); 
+
+        if (FoundElements.Count() == 0)
+        {
+            return NoContent();
+        }
+        else
+        {
+            try
+            {
+                return Ok(FoundElements);
+            }
+            catch (DbUpdateException dbEX)
+            {
+                throw new DbUpdateException("An error occurred while retrieving Products.", dbEX);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Retrieves all Products by low amoung.
+    /// </summary>
+    /// <returns>A list of Products by their low amount of product.</returns>
+    /// <response code="200">Returns the list of Products by their low amount.</response>
+    /// <response code="204">No content if no Products are found.</response>
+    [HttpGet("/lowamountproducts/")]
+    [SwaggerOperation(Summary = "Get all Products by their low amount", Description = "Retrieves a list of products by Their low amount")]
+    [SwaggerResponse(200, "Returns the list of Products.", typeof(IEnumerable<Product>))]
+    [SwaggerResponse(204, "No content if no Products are found.")]
+    public async Task<ActionResult<IEnumerable<Product>>> LowAmountProducts()
+    {
+        var ProductsAmounts = await Shipment_ProductServices.GetAll();
+        var ProductsSpent = await Products_Orderservices.GetAll();
+
+        var groupedProductsAmounts = ProductsAmounts.GroupBy(pa => pa.Product_id)
+        .Select(g=> new{
+            productID = g.Key,
+            TotalAmount = g.Sum(pa=>pa.Product_amount)
+        });
+
+        var groupedProductsSpent = ProductsSpent.GroupBy(pa=>pa.Product_id)
+        .Select(g=> new{
+            productId = g.Key,
+            TotalQuantity = g.Sum(pa=>pa.Product_quantity)
+        });
+
+        var result = groupedProductsAmounts
+    .GroupJoin(groupedProductsSpent,
+        amount => amount.productID,
+        spent => spent.productId,
+        (amount, spentGroup) => new
+        {
+            ProductId = amount.productID,
+            TotalAmount = amount.TotalAmount,
+            TotalQuantity = spentGroup.FirstOrDefault()?.TotalQuantity ?? 0
+        })
+    .Select(x => new
+    {
+        ProductId = x.ProductId,
+        LeftAmount = x.TotalAmount - x.TotalQuantity
+    })
+    .ToList();
+
+    var productsWithLowAmount = result.Where(p=>p.LeftAmount<=5).ToList(); 
+
+        if (productsWithLowAmount.Count() == 0)
+        {
+            return NoContent();
+        }
+        else
+        {
+            try
+            {
+                return Ok(productsWithLowAmount);
+            }
+            catch (DbUpdateException dbEX)
+            {
+                throw new DbUpdateException("An error occurred while retrieving Products.", dbEX);
+            }
         }
     }
 }
