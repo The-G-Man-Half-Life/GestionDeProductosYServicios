@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestionDeProductosYServicios.Services;
-public class Products_Orderservices: IProduct_orderRepository
+public class Products_Orderservices: IProduct_OrderRepository
 {
     public readonly ApplicationDbcontext Context;
 
@@ -15,7 +15,7 @@ public class Products_Orderservices: IProduct_orderRepository
         this.Context = Context;
     }
 
-    public async Task<IEnumerable<Product_order>> GetAll()
+    public async Task<IEnumerable<Product_Order>> GetAll()
     {
         try
         {
@@ -27,7 +27,7 @@ public class Products_Orderservices: IProduct_orderRepository
             throw new DbUpdateException("un error ocurrio", dbEX);
         }
     }
-    public async Task<Product_order> GetById(int id)
+    public async Task<Product_Order> GetById(int id)
     {
         try
         {
@@ -39,11 +39,11 @@ public class Products_Orderservices: IProduct_orderRepository
             throw new DbUpdateException("un error ocurrio", dbEX);
         }
     }
-    public async Task Create(Product_order Product_order)
+    public async Task Create(Product_Order Product_Order)
     {
         try
         {
-            await Context.Products_Orders.AddAsync(Product_order);
+            await Context.Products_Orders.AddAsync(Product_Order);
             await Context.SaveChangesAsync();
             
         }
@@ -57,8 +57,8 @@ public class Products_Orderservices: IProduct_orderRepository
     {
         try
         {
-            var Product_orderToDelete = await GetById(id);
-            Context.Products_Orders.Remove(Product_orderToDelete);
+            var Product_OrderToDelete = await GetById(id);
+            Context.Products_Orders.Remove(Product_OrderToDelete);
             await Context.SaveChangesAsync();
         }
         catch (DbUpdateException dbEX)
@@ -67,11 +67,11 @@ public class Products_Orderservices: IProduct_orderRepository
             throw new DbUpdateException("un error ocurrio", dbEX);
         }
     }
-    public async Task Update(Product_order Product_order)
+    public async Task Update(Product_Order Product_Order)
     {
         try
         {
-            Context.Products_Orders.Update(Product_order);
+            Context.Products_Orders.Update(Product_Order);
             await Context.SaveChangesAsync();
         }
         catch (DbUpdateException dbEX)

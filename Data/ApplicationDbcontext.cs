@@ -12,13 +12,20 @@ public class ApplicationDbcontext:DbContext
     public DbSet<Product> Products {get; set;}
     public DbSet<Shipment_Product> Shipment_Products {get; set;}
     public DbSet<Order> Orders {get; set;}
-    public DbSet<Product_order> Products_Orders{get; set;}
+    public DbSet<Product_Order> Products_Orders{get; set;}
 
     public ApplicationDbcontext(DbContextOptions<ApplicationDbcontext> options):base(options) {}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        // CarrierSeeder.Seed(modelBuilder);
+        CarrierSeeder.Seed(modelBuilder);
+        CategorySeeder.Seed(modelBuilder);
+        ClientSeeder.Seed(modelBuilder);
+        ShipmentSeeder.Seed(modelBuilder);
+        ProductSeeder.Seed(modelBuilder);
+        ShipmentProductSeeder.Seed(modelBuilder);
+        OrderSeeder.Seed(modelBuilder);
+        ProductOrderSeeder.Seed(modelBuilder);
     }
 } 

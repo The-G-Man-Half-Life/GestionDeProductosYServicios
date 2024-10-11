@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace GestionDeProductosYServicios.Models;
 
 [Table("Products_orders")]
-public class Product_order
+public class Product_Order
 {
     [Key]
     [Column("product_order_id")]
@@ -26,11 +26,11 @@ public class Product_order
     [ForeignKey(nameof(Order_id))]
     public Order? Order {get; set;}
 
-    public Product_order(int Product_quantity,int Product_id,int Order_id)
+    public Product_Order(int Product_quantity,int Product_id,int Order_id)
     {
         this.Product_quantity = Product_quantity;
         this.Product_id = Product_id;
         this.Order_id = Order_id;
     }
-    public Product_order() {}
+    public Product_Order() {}
 }

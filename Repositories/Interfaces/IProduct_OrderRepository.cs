@@ -3,12 +3,12 @@ using GestionDeProductosYServicios.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestionDeProductosYServicios.Repositories.Interfaces;
-public interface IProduct_orderRepository
+public interface IProduct_OrderRepository
 {
-    Task<IEnumerable<Product_order>> GetAll();
-    Task<Product_order> GetById(int id);
-    Task Create(Product_order Product_order);
+    Task<IEnumerable<Product_Order>> GetAll();
+    Task<Product_Order> GetById(int id);
+    Task Create(Product_Order Product_Order);
     Task Delete(int id);
-    Task Update(Product_order Product_order);
+    Task Update(Product_Order Product_Order);
     Task<bool> CheckExistence(int id);
 }

@@ -44,8 +44,8 @@ builder.Services.AddScoped<IShipment_ProductRepository, Shipment_ProductServices
 builder.Services.AddScoped<Shipment_ProductServices>();
 builder.Services.AddScoped<IOrderRepository, OrderServices>();
 builder.Services.AddScoped<OrderServices>();
-builder.Services.AddScoped<IProduct_orderRepository, Product_orderServices>();
-builder.Services.AddScoped<Product_orderServices>();
+builder.Services.AddScoped<IProduct_OrderRepository, Products_Orderservices>();
+builder.Services.AddScoped<Products_Orderservices>();
 
 //configurando el entorno de la pagina
 builder.Services.AddControllers();
