@@ -11,11 +11,9 @@ public class ShipmentDTO
     public double Shipment_price_usa {get; set;}
 
     [Required]
-    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",ApplyFormatInEditMode = true)]
     public DateOnly? Shipment_order_date {get; set;}
 
     [Required]
-    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",ApplyFormatInEditMode = true)]
     public DateOnly? Shipment_arrival_date {get; set;}
 
     [Required]

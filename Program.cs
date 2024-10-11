@@ -18,7 +18,6 @@ var DB_UID = Environment.GetEnvironmentVariable("DB_UID");
 var DB_PASSWORD = Environment.GetEnvironmentVariable("DB_PASSWORD");
 
 var connectionString =  $"server={DB_HOST};port={DB_PORT};database={DB_DATABASE};uid={DB_UID};password={DB_PASSWORD}";
-
 //Crear builder de la aplicacion web
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +34,8 @@ builder.Services.AddScoped<ICategoryRepository, CategoryServices>();
 builder.Services.AddScoped<CategoryServices>();
 builder.Services.AddScoped<IClientRepository, ClientServices>();
 builder.Services.AddScoped<ClientServices>();
+builder.Services.AddScoped<IShipmentRepository, ShipmentServices>();
+builder.Services.AddScoped<ShipmentServices>();
 
 //configurando el entorno de la pagina
 builder.Services.AddControllers();

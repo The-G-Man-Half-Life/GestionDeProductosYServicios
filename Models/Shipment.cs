@@ -15,7 +15,7 @@ public class Shipment
     public double Shipment_weight_kg {get; set;}
 
     [Column("shipments_price_usa")]
-    public string Shipment_price_usa {get; set;}
+    public double Shipment_price_usa {get; set;}
 
     [Column("shipment_order_date")]
     public DateOnly? Shipment_order_date {get; set;}
@@ -29,7 +29,7 @@ public class Shipment
     [ForeignKey(nameof(Carrier_id))]
     public Carrier? Carrier {get; set;}
 
-    public Shipment(double Shipment_weight_kg ,string Shipment_price_usa ,DateOnly Shipment_order_date ,DateOnly Shipment_arrival_date ,int Carrier_id)
+    public Shipment(double Shipment_weight_kg ,double Shipment_price_usa ,DateOnly? Shipment_order_date ,DateOnly? Shipment_arrival_date ,int Carrier_id)
     {
         this.Shipment_weight_kg = Shipment_weight_kg;
         this.Shipment_price_usa = Shipment_price_usa;
