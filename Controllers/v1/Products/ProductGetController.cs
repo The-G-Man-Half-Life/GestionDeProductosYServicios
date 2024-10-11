@@ -14,7 +14,7 @@ public class ProductGetController : ProductController
 {
     private readonly ProductServices ProductServices;
 
-    public ProductGetController(ProductServices ProductServices) : base(ProductServices)
+    public ProductGetController(ProductServices ProductServices): base(ProductServices)
     {
         this.ProductServices = ProductServices;
     }

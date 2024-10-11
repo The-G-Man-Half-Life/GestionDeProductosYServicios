@@ -5,11 +5,11 @@ public class Shipment_ProductDTO
 {
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Product amount must be greater than 0.")]
-    public int ProductAmount { get; set; }
+    public int Product_amount { get; set; }
 
     [Required]
-    public int ProductId { get; set; }
+    public int Product_id { get; set; }
 
     [Required]
-    public int ShipmentId { get; set; }
+    public int Shipment_id { get; set; }
 }
